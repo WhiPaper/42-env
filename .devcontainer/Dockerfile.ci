@@ -17,6 +17,7 @@ RUN apt-get update && \
     gdb lldb-12 \
     pkg-config binutils libc6-dbg \
     libbsd-dev zlib1g-dev libxext-dev \
+    libncurses5-dev libncursesw5-dev \
     python3 python3-pip python3-venv \
     make cmake meson \
     && rm -rf /var/lib/apt/lists/* \
