@@ -3,7 +3,7 @@
 FROM ubuntu:22.04 AS base
 
 ARG VERSION_MAKE=4.3
-ARG VERSION_LIB_READLINE=8.1
+# ARG VERSION_LIB_READLINE=8.1
 ARG VERSION_VALGRIND=3.18.1
 
 WORKDIR /root
@@ -17,7 +17,7 @@ RUN apt-get update && \
     gdb lldb-12 \
     pkg-config binutils libc6-dbg \
     libbsd-dev zlib1g-dev libxext-dev \
-    libncurses5-dev libncursesw5-dev \
+    libncurses5-dev libncursesw5-dev libreadline-dev \
     python3 python3-pip python3-venv \
     make cmake meson \
     && rm -rf /var/lib/apt/lists/* \
@@ -36,12 +36,12 @@ RUN if [ "$VERSION_MAKE" != "$(make --version | head -n1 | cut -d' ' -f3)" ]; th
     cd .. && rm -rf make-${VERSION_MAKE}* ; \
     fi
 
-RUN wget https://ftp.gnu.org/gnu/readline/readline-${VERSION_LIB_READLINE}.tar.gz && \
-    tar -xzvf readline-${VERSION_LIB_READLINE}.tar.gz && \
-    cd readline-${VERSION_LIB_READLINE} && \
-    ./configure --enable-shared && \
-    make && make install && \
-    cd .. && rm -rf readline-${VERSION_LIB_READLINE}*
+# RUN wget https://ftp.gnu.org/gnu/readline/readline-${VERSION_LIB_READLINE}.tar.gz && \
+#    tar -xzvf readline-${VERSION_LIB_READLINE}.tar.gz && \
+#    cd readline-${VERSION_LIB_READLINE} && \
+#    ./configure --enable-shared && \
+#    make && make install && \
+#    cd .. && rm -rf readline-${VERSION_LIB_READLINE}*
 
 RUN git clone https://github.com/42paris/minilibx-linux.git && \
     cd minilibx-linux && make && \
